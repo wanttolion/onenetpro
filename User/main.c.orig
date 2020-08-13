@@ -1,0 +1,48 @@
+#include "stm32f10x.h"   // 相当于51单片机中的  #include <reg51.h>
+#include "include.h"
+
+	u8 temp_content[64] = "\0";
+	u8 id[10] = "temp";
+	u8 value[10] = "50.00";
+	u8 device_id[20] = "608464608";
+	u8 api_key[32] = "";
+int main(void)
+{
+
+	//外设初始化
+	//显示屏模块初始化
+	ILI9341_Init();
+	//串口初始化    //调试用
+	USART_Config();
+	//DHT11初始化
+	
+	//MQ7传感器初始化
+	
+	//wifi模块初始化,初始化时每一步都需要判断
+	
+	
+	//LED初始化
+	
+
+	LCD_SetFont(&Font8x16);
+    LCD_SetColors(RED,BLACK);
+	
+	ILI9341_Clear(0,0,LCD_X_LENGTH,LCD_Y_LENGTH);	/* 清屏，显示全黑 */
+	
+	esp8266_init();
+	
+    //test 发送http包
+	
+	Add_New_DataPoint(temp_content, id, value);
+	Esp8266_SendData();
+	while(1){
+		//传感器定时接收数据
+		//数据封装
+		//发送到wifi模块串口
+		//LCD屏幕显示
+	}
+	
+	
+}
+
+
